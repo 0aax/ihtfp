@@ -1,0 +1,29 @@
+{
+    "default": {
+        "I Hate This Fucking Place": 0,
+        "I Have Truly Found Paradise": 10
+    },
+    "neg": {
+        "I Hate Teflon Frying Pans": 3,
+        "I Have This Funny Pheeling": 4,
+        "I Have Thoughtfully Flattered Professors": 5,
+        "I Have Totally Forgotten Physics": 4,
+        "In Hell The Foolish Pay": 3,
+        "Insurmountable Hills Tax Foolish People": 2,
+        "Intelligence Happens To Fail People": 3,
+        "Ironic Happenstance, Twixt Foolish Passion": 4,
+        "It's Hard To Finish Papers": 3,
+        "Ivory High Towers Foster Pedantry": 4
+    },
+    "pos": {
+        "I Have Thoughtfully Flattered Professors": 5,
+        "Is Happiness The First Priority?": 5,
+        "I Have The Funniest Professors": 9,
+        "I Hope To Find Peace": 7,
+        "I Hug The Funniest People": 8,
+        "Icarus Had Tremendous Flying Potential": 6,
+        "In Heaven The Fine Play": 7,
+        "Intense, Hard Thinking Feels Phenomenal": 8,
+        "Interesting How Time Flies Past": 7
+    }
+}
