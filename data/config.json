@@ -1,5 +1,9 @@
 {
-    "color": [255,140,0],
-    "time": 4,
-    "num_options": 4
+    "color": [
+        255,
+        140,
+        0
+    ],
+    "time": 30,
+    "num_options": 5
 }
