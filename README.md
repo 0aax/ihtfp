@@ -1,25 +1,29 @@
 # ihtfp
-Log your daily mood using the various meanings of ihtfp.
+Which ihtfp describes today's mood?
 
+![](example/example_mood_plot.png)
+## Installation
+Clone repository.
+```
+git clone https://github.com/0aax/ihtfp.git
+```
+(Optional) Create and activate a virtual environment.
+```
+virtualenv -p python3 venv
+source venv/bin/activate
+```
+Install package.
+```
+pip install path/to/ihtfp
+```
 ## Usage
-Log daily mood.
 ```
-ihtfp
-ihtfp daily
-```
-Generate and save mood plot.
-```
-ihtfp plot
-```
-Add new ihtfp meaning and mood rating (`int` between 1-10).
-```
-ihtfp add "MEANING" RATING
-```
-Delete all instances of an ihtfp meaning.
-```
-ihtfp del "MEANING"
-```
-Change value of `VAR` in `config.json`.
-```
-ihtfp export VAR VAL
+ihtfp                               log daily mood
+
+ihtfp daily                         log daily mood
+ihtfp plot                          generate and save mood chart
+
+ihtfp add "MEANING" RATING          add new ihtfp meaning and mood rating
+ihtfp del "MEANING"                 delete all instances of a particular meaning
+ihtfp export VAR VAL                edit config variables
 ```

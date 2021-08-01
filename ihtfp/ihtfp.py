@@ -15,13 +15,13 @@ Options:
 
 import os
 import sys
+import pkgutil
 import json
 import random
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-
 import numpy as np
 
+from matplotlib.colors import ListedColormap
 from datetime import date, timedelta
 
 os.system("")
@@ -77,7 +77,7 @@ def main():
 
     js_load = []
     for fn in data_fls:
-        with open(os.path.join('data', fn + '.json'), 'r') as fl_tmp:
+        with open(os.path.join(os.path.dirname(__file__), 'data', fn + '.json'), 'r') as fl_tmp:
             js_load.append(json.load(fl_tmp))
             fl_tmp.seek(0)
     meaning_rating, cfg, log = js_load
@@ -88,9 +88,7 @@ def main():
 
     if len(args) == 0 or args[0] == 'daily':
         def_opts = [(k, v) for k, v in meaning_rating['default'].items()]
-
         rand_mns = pick_random(cfg['num_options']-len(def_opts), meaning_rating)
-
         mns = def_opts + rand_mns
 
         for i, (k, v) in enumerate(mns):
@@ -144,12 +142,13 @@ def main():
                         mood_array[6-r][time-1-c] = curr_log[2]
                         log_pos += 1
                     prev_log_val = curr_log[1]
-                
+        scaled_ma = np.repeat(np.repeat(mood_array, repeats=15, axis=0), repeats=15, axis=1)    
         cmap = build_colormap(cfg['color'][0], cfg['color'][1], cfg['color'][2])
         plt.axis('off')
-        plt.imsave(os.path.join('plot', '{}_mood_plot.png'.format(str(date.today()))), mood_array, vmin=0.0, vmax=10.0, cmap=cmap)
+        os.makedirs(os.path.join(os.path.dirname(__file__), 'plot'), exist_ok=True)
+        plt.imsave(os.path.join(os.path.dirname(__file__), 'plot', '{}_mood_plot.png'.format(str(date.today()))), scaled_ma, vmin=0.0, vmax=10.0, cmap=cmap)
         plt.close()
-        print(' {} '.format(save_sym), 'saved mood plot to {}'.format(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'plot', 'mood_plot.png')))
+        print(' {} '.format(save_sym), 'saved mood plot to {}'.format(os.path.join(os.path.dirname(__file__), 'plot', '{}_mood_plot.png'.format(str(date.today())))))
     elif args[0] == 'add':
         if len(args) != 3:
             print(' {} '.format(error_sym), 'Incorrect number of parameters')
@@ -225,7 +224,7 @@ def main():
         sys.exit(0)
 
     for i, fn in enumerate(data_fls):
-        with open(os.path.join('data', fn + '.json'), 'w') as fl_tmp:
+        with open(os.path.join(os.path.dirname(__file__), 'data', fn + '.json'), 'w') as fl_tmp:
             json.dump(js_load[i], fl_tmp, indent=4)
 
 if __name__ == '__main__':
