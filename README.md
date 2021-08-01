@@ -8,7 +8,7 @@
 > *Plot mood charts!*
 
 <p align='center'>
-<img src="example/example_mood_plot.png" width="600">
+<img src="example/example_mood_plot.png" width="500">
 </p>
 
 ## Installation
