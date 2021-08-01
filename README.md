@@ -1,7 +1,12 @@
 # ihtfp
-Which ihtfp describes today's mood?
+> *Which ihtfp describes today's mood?*
+
+![](example/example-term.gif)
+
+> *Plot mood charts!*
 
 ![](example/example_mood_plot.png)
+
 ## Installation
 Clone repository.
 ```

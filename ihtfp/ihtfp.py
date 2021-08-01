@@ -15,7 +15,6 @@ Options:
 
 import os
 import sys
-import pkgutil
 import json
 import random
 import matplotlib.pyplot as plt
@@ -142,13 +141,15 @@ def main():
                         mood_array[6-r][time-1-c] = curr_log[2]
                         log_pos += 1
                     prev_log_val = curr_log[1]
+    
         scaled_ma = np.repeat(np.repeat(mood_array, repeats=15, axis=0), repeats=15, axis=1)    
         cmap = build_colormap(cfg['color'][0], cfg['color'][1], cfg['color'][2])
         plt.axis('off')
-        os.makedirs(os.path.join(os.path.dirname(__file__), 'plot'), exist_ok=True)
-        plt.imsave(os.path.join(os.path.dirname(__file__), 'plot', '{}_mood_plot.png'.format(str(date.today()))), scaled_ma, vmin=0.0, vmax=10.0, cmap=cmap)
+
+        save_path = os.path.expanduser('~')
+        plt.imsave(os.path.join(save_path, '{}_mood_plot.png'.format(str(date.today()))), scaled_ma, vmin=0.0, vmax=10.0, cmap=cmap)
         plt.close()
-        print(' {} '.format(save_sym), 'saved mood plot to {}'.format(os.path.join(os.path.dirname(__file__), 'plot', '{}_mood_plot.png'.format(str(date.today())))))
+        print(' {} '.format(save_sym), 'saved mood plot to {}'.format(os.path.join(save_path, '{}_mood_plot.png'.format(str(date.today())))))
     elif args[0] == 'add':
         if len(args) != 3:
             print(' {} '.format(error_sym), 'Incorrect number of parameters')
