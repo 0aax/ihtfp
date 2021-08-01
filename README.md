@@ -16,7 +16,7 @@ Clone repository.
 ```
 git clone https://github.com/0aax/ihtfp.git
 ```
-(Optional) Create and activate a virtual environment.
+(Optional) Create and activate virtual environment.
 ```
 virtualenv -p python3 venv
 source venv/bin/activate
