@@ -25,16 +25,6 @@ from datetime import date, timedelta
 
 os.system("")
 
-ccodes = {'blue': 69,
-          'orange': 166,
-          'red': 160,
-          'yellow': 220,
-          'green': 64,
-          'beige': 216,
-          'purple': 140}
-
-ansi_codes = {'reset': u'\u001b[0m'}
-
 def pick_random(k, mnrt):
     rand_mn = random.sample(mnrt['other'].items(), k)
     return rand_mn
@@ -58,6 +48,16 @@ def build_colormap(r, g, b):
     vals[:, 2] = np.linspace(b/256, 1, N)[::-1]
     cmap = ListedColormap(vals)
     return cmap
+
+ccodes = {'blue': 69,
+          'orange': 166,
+          'red': 160,
+          'yellow': 220,
+          'green': 64,
+          'beige': 216,
+          'purple': 140}
+
+ansi_codes = {'reset': u'\u001b[0m'}
 
 error_sym = get_color(ccodes['red']) + '!' + ansi_codes['reset']
 add_sym = get_color(ccodes['green']) + '+' + ansi_codes['reset']
@@ -93,9 +93,8 @@ def main():
         for i, (k, v) in enumerate(mns):
             print(' ', i+1, list_sym, '{} ({})'.format(k, v))
         i_other = len(mns)+1
-        print(' ', i_other, list_sym, 'Other:')
+        print(' ', i_other, list_sym, 'Other:\n')
         
-        print('')
         chosen_opt = input('Option number: ')
         while not chosen_opt.isdigit() or int(chosen_opt) > cfg['num_options'] + 1:
             print(' {} '.format(error_sym), 'Invalid option')
