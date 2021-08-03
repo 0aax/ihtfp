@@ -1,18 +1,22 @@
 # ihtfp
 > *Which ihtfp describes today's mood?*
 
-![](example/example-term.gif)
+<p align='center'>
+<img src="example/example-term.gif" width="500">
+</p>
 
 > *Plot mood charts!*
 
-![](example/example_mood_plot.png)
+<p align='center'>
+<img src="example/example_mood_plot.png" width="500">
+</p>
 
 ## Installation
 Clone repository.
 ```
 git clone https://github.com/0aax/ihtfp.git
 ```
-(Optional) Create and activate a virtual environment.
+(Optional) Create and activate virtual environment.
 ```
 virtualenv -p python3 venv
 source venv/bin/activate
