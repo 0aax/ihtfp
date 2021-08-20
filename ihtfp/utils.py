@@ -39,23 +39,32 @@ def build_colormap(r, g, b):
     cmap = ListedColormap(vals)
     return cmap
 
-def load_json(data_filenames):
+def load_json(prim_arg):
     """
     Leads .json files as python dictionaries and collects them in an array.
     """
     js_load = []
+    arg_load = {'daily': ['meaning_rating', 'config', 'log'],
+                'add': ['meaning_rating'],
+                'del': ['meaning_rating'],
+                'export': ['config']}
 
-    for fn in data_filenames:
+    for fn in arg_load[prim_arg]:
         with open(os.path.join(os.path.dirname(__file__), 'data', fn + '.json'), 'r') as fl_tmp:
             js_load.append(json.load(fl_tmp))
             fl_tmp.seek(0)
 
     return js_load
 
-def dump_json(data_filenames, modified):
+def dump_json(prim_arg, modified):
     """
     Dumps python dictionaries into json files.
     """
-    for i, fn in enumerate(data_filenames):
+    arg_dump = {'daily': ['meaning_rating', 'log'],
+                'add': ['meaning_rating'],
+                'del': ['meaning_rating'],
+                'export': ['config']}
+
+    for i, fn in enumerate(arg_dump[prim_arg]):
         with open(os.path.join(os.path.dirname(__file__), 'data', fn + '.json'), 'w') as fl_tmp:
             json.dump(modified[i], fl_tmp, indent=4)
