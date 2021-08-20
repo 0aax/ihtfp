@@ -1,5 +1,5 @@
-import utils as utils
-import console as console
+import ihtfp.utils as utils
+import ihtfp.console as console
 
 from datetime import date
 

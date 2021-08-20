@@ -1,5 +1,5 @@
 import sys
-import utils as utils
+import ihtfp.utils as utils
 
 ccodes = {'blue': 69,
           'orange': 166,

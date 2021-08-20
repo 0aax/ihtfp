@@ -3,8 +3,8 @@
 import os
 import sys
 
-from commands import daily, add, delete, export, undefined, help
-from utils import load_json, dump_json
+from ihtfp.commands import daily, add, delete, export, undefined, help
+from ihtfp.utils import load_json, dump_json
 
 os.system("")
 
