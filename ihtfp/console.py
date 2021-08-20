@@ -63,6 +63,20 @@ def save_message(msg):
 def list_message(i, msg):
     print(' {} {} {}'.format(i, list_sym, msg))
 
-if __name__ == '__main__':
-    var = loop('in', 'error', lambda x: not x.isdigit() or int(x) > 5)
-    print(var)
+def help_message():
+    help = \
+    """
+    Usages:
+        ihtfp                         log daily ihtfp
+        ihtfp daily                   log daily ihtfp
+        ihtfp plot                    generate and save plot
+
+        ihtfp add "MEANING" RATING    add new meaning and rating
+        ihtfp del "MEANING"           delete all instances of meaning
+        ihtfp export VAR VAL          change value in config
+
+    Options:
+        -h, --help                    get commands
+    """
+    print(help)
+    sys.exit(0)

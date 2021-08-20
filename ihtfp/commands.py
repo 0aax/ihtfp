@@ -153,3 +153,6 @@ def undefined(args):
     For unrecognized commands.
     """
     console.error_message('{} is not a recognized command.'.format(args[0]), exit=True)
+
+def help():
+    console.help_message()
