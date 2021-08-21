@@ -1,10 +1,7 @@
 import os
 import json
 import random as rd
-import numpy as np
-
 from datetime import date, timedelta
-from matplotlib.colors import ListedColormap
 
 def pick_random(k, mnrt):
     rand_mn = rd.sample(mnrt['other'].items(), k)
@@ -28,16 +25,28 @@ def get_prev_day(d):
     """
     curr = date(*map(int, d.split('-')))
     prev = curr - timedelta(days=1)
-    return int(str(prev).replace('-', ''))
+    return str(prev)
 
-def build_colormap(r, g, b):
-    N = 10
-    vals = np.ones((N, 4))
-    vals[:, 0] = np.linspace(r/256, 1, N)[::-1]
-    vals[:, 1] = np.linspace(g/256, 1, N)[::-1]
-    vals[:, 2] = np.linspace(b/256, 1, N)[::-1]
-    cmap = ListedColormap(vals)
-    return cmap
+def get_colormap(base_color):
+    """
+    Returns dictionary of RGB equivalents of base color different alpha intervals.
+    """
+    colormap = {}
+
+    for i in range(10):
+        color_tmp = tuple(((1 - i/10) * 255) + (i/10 * v) for v in base_color)
+        colormap[i] = color_tmp
+    colormap[10] = tuple(base_color)
+    
+    return colormap
+
+def save_ppm(width, height, window_size, arr):
+    PPMheader = 'P6\n' + str(width*window_size) + ' ' + str(height*window_size) + '\n255\n'
+
+    save_path = os.path.expanduser('~')
+    with open(os.path.join(save_path, '{}_mood_plot.png'.format(str(date.today()))), 'wb') as f:
+        f.write(bytearray(PPMheader, 'ascii'))
+        arr.tofile(f)
 
 def load_json(prim_arg):
     """
@@ -47,7 +56,8 @@ def load_json(prim_arg):
     arg_load = {'daily': ['meaning_rating', 'config', 'log'],
                 'add': ['meaning_rating'],
                 'del': ['meaning_rating'],
-                'export': ['config']}
+                'export': ['config'],
+                'plot': ['config', 'log']}
 
     for fn in arg_load[prim_arg]:
         with open(os.path.join(os.path.dirname(__file__), 'data', fn + '.json'), 'r') as fl_tmp:

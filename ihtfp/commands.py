@@ -1,6 +1,7 @@
 import ihtfp.utils as utils
 import ihtfp.console as console
 
+import array
 from datetime import date
 
 def daily(meaning_rating, cfg, log):
@@ -133,7 +134,8 @@ def export_time(args):
     console.validate('Incorrect number of parameters.', len(args) != 3)
 
     time = args[2]
-    console.validate('Invalid time period.', not time.isdigit())
+
+    console.validate('Invalid time period.', not time.isdigit() and int(time) < 1)
 
     return int(time)
 
@@ -146,7 +148,50 @@ def export_num_options(args):
     num_opts = args[2]
     console.validate('Invalid number of options.', not num_opts.isdigit())
 
-    return num_opts
+    return int(num_opts)
+
+def plot(cfg, log):
+    """
+    Saves mood plot as .ppm file using no external modules.
+    """
+    time_period = cfg['time']
+    total_log = time_period * 7
+    curr_log = 0
+
+    base_color = cfg['color']
+    colormap = utils.get_colormap(base_color)
+
+    last_logged_day = ''
+    log_day = (lambda d: last_logged_day == '' or utils.get_prev_day(last_logged_day) == d)
+    
+    small_plot = [[0] * time_period for _ in range(7)]
+    week, relative_day = time_period - 1, 6
+
+    for date in sorted(log, reverse=True):
+        if curr_log > total_log: break
+
+        meaning, rating = log[date]
+        day_color = colormap[rating] if log_day(date) else (255, 255, 255)
+
+        small_plot[relative_day][week] = day_color
+
+        if relative_day > 0:
+            relative_day -= 1
+        else:
+            relative_day = 6
+            week -= 1
+        
+        curr_log += 1
+    
+    large_plot = []
+
+    for row in small_plot:
+        # each day is a 15x15 pixel window
+        row_expanded = [int(v) for rgb_triple in row for _ in range(15) for v in rgb_triple]
+        large_plot += row_expanded * 15
+    
+    large_plot = array.array('B', large_plot)
+    utils.save_ppm(time_period, 7, 15, large_plot)
 
 def undefined(args):
     """
@@ -154,5 +199,5 @@ def undefined(args):
     """
     console.error_message('{} is not a recognized command.'.format(args[0]), exit=True)
 
-def help():
+def help_():
     console.help_message()

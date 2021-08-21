@@ -18,6 +18,5 @@ setup(
     package_data={'ihtfp': ['data/*.json']},
     entry_points ={'console_scripts': ['ihtfp=ihtfp.ihtfp:main']},
 
-    install_requires=['numpy', 'matplotlib'],
     zip_safe = False
 )

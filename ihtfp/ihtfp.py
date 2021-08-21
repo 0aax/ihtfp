@@ -3,7 +3,7 @@
 import os
 import sys
 
-from ihtfp.commands import daily, add, delete, export, undefined, help
+from ihtfp.commands import daily, add, delete, export, plot, undefined, help_
 from ihtfp.utils import load_json, dump_json
 
 os.system("")
@@ -15,7 +15,7 @@ def program():
     args = aargs[1:] if len(aargs) != 1 else []
 
     if len({"-h", "--help"} & set(args)) != 0:
-        help()
+        help_()
 
     if len(args) == 0 or args[0] == 'daily':
         meaning_rating, cfg, log = load_json('daily')
@@ -33,6 +33,9 @@ def program():
         cfg, = load_json('export')
         cfg = export(cfg, args)
         dump_json('export', [cfg])
+    elif args[0] == 'plot':
+        cfg, log = load_json('plot')
+        plot(cfg, log)
     else:
         undefined(args)
 
