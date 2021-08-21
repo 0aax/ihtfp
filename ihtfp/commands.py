@@ -154,6 +154,7 @@ def plot(cfg, log):
     """
     Saves mood plot as .ppm file using no external modules.
     """
+    console.validate('No days have been logged.', log == {})
     time_period = cfg['time']
     total_log = time_period * 7
     curr_log = 0
