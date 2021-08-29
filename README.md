@@ -5,7 +5,7 @@
 <img src="example/example-term.gif" width="500">
 </p>
 
-> *Plot mood charts! (requires no external packages)*
+> *Plot mood charts! (requires no external modules)*
 
 <p align='center'>
 <img src="example/example_mood_plot.png" width="500">
